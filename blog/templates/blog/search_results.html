@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>Search Results</h1>
+    <p>You searched for: {{ query }}</p>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="viga">
+                <div class="contenido">
+                    <p>publicado: {{ post.published_date }}</p>
+                    <h2 class="ttt"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                    {% if post.imagen %}
+                        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}
